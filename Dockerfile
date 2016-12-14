@@ -1,15 +1,6 @@
 FROM binhnv/openjdk
 MAINTAINER "Binh Van Nguyen<binhnv80@gmail.com>"
 
-# Hdfs ports
-EXPOSE 50010 50020 50070 50075 50090 8020 9000
-# Mapred ports
-EXPOSE 19888
-#Yarn ports
-EXPOSE 8030 8031 8032 8033 8040 8042 8088
-#Other ports
-EXPOSE 49707 2122
-
 ENV HD_VERSION="2.7.3" \
     HD_NAMENODE_HOSTNAME="localhost" \
     HD_DATA_DIR="${MY_APP_DATA_DIR}/hadoop" \
