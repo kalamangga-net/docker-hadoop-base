@@ -20,6 +20,9 @@ g_hadoop_log_dir="${HADOOP_LOG_DIR}"
 g_yarn_log_dir="${YARN_LOG_DIR}"
 g_pid_dir="${HD_PID_DIR}"
 
+g_hbase_home="${HBASE_HOME}"
+g_hbase_bin_url="https://github.com/binhnv/hbase-binaries/releases/download/v${HBASE_VERSION}-hadoop-${HD_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz"
+
 function update_ssh_config {
     local ssh_dir=$1
 
@@ -55,6 +58,14 @@ function setup_users {
         setup_user_ssh ${u} ${g_group}
     done
     setup_user_ssh "root" "root"
+}
+
+function install_hbase {
+    mkdir -p ${g_hbase_home}
+
+    echo "Downloading file from ${g_hbase_bin_url}..."
+    curl -sL ${g_hbase_bin_url} | tar -xz -C ${g_hbase_home} --strip-component=1
+    ln -s ${g_hbase_home}/conf/hbase-site.xml ${g_conf_dir}/hbase-site.xml
 }
 
 function setup_package {
@@ -117,6 +128,7 @@ function main {
     setup_users
     setup_package
     setup_dirs
+    install_hbase
     generate_keystore
     generate_http_auth_secret
 

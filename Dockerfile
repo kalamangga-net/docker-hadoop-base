@@ -2,6 +2,21 @@ FROM binhnv/openjdk
 MAINTAINER "Binh Van Nguyen<binhnv80@gmail.com>"
 
 ENV HD_VERSION="2.7.3" \
+    
+    HBASE_VERSION="1.1.2" \
+    HBASE_HOME="${MY_APP_DIR}/hbase" \
+    HBASE_HEAPSIZE="256M" \
+    HBASE_OFFHEAPSIZE="256M" \
+    # https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.4.2/bk_HDP_Reference_Guide/content/hbase-ports.html
+    HBASE_MASTER_PORT="16000" \
+    HBASE_MASTER_INFO_PORT="16010" \
+    HBASE_REGIONSERVER_PORT="16020" \
+    HBASE_REGIONSERVER_INFO_PORT="16030" \
+    HBASE_THRIFT_PORT="9090" \
+    HBASE_THRIFT_INFO_PORT="9095" \
+    HBASE_REST_PORT="8080" \
+    HBASE_REST_INFO_PORT="8085" \
+
     HD_NAMENODE_HOSTNAME="localhost" \
     HD_DATA_DIR="${MY_APP_DATA_DIR}/hadoop" \
     # overwrite Hadoop configuration environment variable
@@ -15,7 +30,8 @@ ENV HD_VERSION="2.7.3" \
 
 ENV HD_DISTRO_NAME="hadoop-${HD_VERSION}" \
     HD_PID_DIR="${DATA_DIR}/pids" \
-    HADOOP_CONF_DIR="${HADOOP_PREFIX}/etc/hadoop"
+    HADOOP_CONF_DIR="${HADOOP_PREFIX}/etc/hadoop" \
+    HBASE_CONF_DIR="${HBASE_HOME}/conf"
 
 ENV HADOOP_COMMON_HOME="${HADOOP_PREFIX}" \
     HADOOP_MAPRED_HOME="${HADOOP_PREFIX}" \
@@ -54,5 +70,6 @@ COPY scripts/build /my_build
 RUN /my_build/install.sh && rm -rf /my_build
 
 COPY templates ${MY_TEMPLATE_DIR}
+COPY scripts/exec /usr/bin/
 
 WORKDIR ${HADOOP_PREFIX}
