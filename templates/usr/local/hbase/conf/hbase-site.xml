@@ -8,8 +8,20 @@
       <value>{{ replace .Env.ZOOKEEPER_HOST "\"" "" -1 }}</value>
     </property>
     <property>
+      <name>zookeeper.session.timeout</name>
+      <value>{{ .Env.HBASE_ZOOKEEPER_SESSION_TIMEOUT }}</value>
+    </property>
+    <property>
         <name>hbase.rootdir</name>
         <value>hdfs://{{ .Env.HD_NAMENODE_HOSTNAME }}:9000/data/hbase</value>
+    </property>
+    <property>
+        <name>hbase.client.retries.number</name>
+        <value>{{ default .Env.HBASE_CLIENT_RETRIES_NUMBER "35" }}</value>
+    </property>
+    <property>
+        <name>zookeeper.recovery.retry</name>
+        <value>{{ default .Env.HBASE_ZOOKEEPER_RECOVERY_RETRY "0" }}</value>
     </property>
     <property>
         <name>hbase.security.authentication</name>
