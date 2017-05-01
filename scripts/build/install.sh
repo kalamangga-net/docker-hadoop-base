@@ -10,7 +10,7 @@ g_hdfs_user="${HADOOP_HDFS_USER}"
 g_yarn_user="${HADOOP_YARN_USER}"
 g_mapred_user="${HADOOP_MAPRED_USER}"
 g_users="${g_hdfs_user} ${g_yarn_user} ${g_mapred_user}"
-g_pkg_url="http://www.apache.org/dist/hadoop/common/${HD_DISTRO_NAME}/${HD_DISTRO_NAME}.tar.gz"
+g_pkg_url="http://archive.apache.org/dist/hadoop/common/${HD_DISTRO_NAME}/${HD_DISTRO_NAME}.tar.gz"
 g_conf_dir="${HADOOP_CONF_DIR}"
 g_nn_dir="${HD_NAMENODE_NAME_DIR}"
 g_cp_dir="${HD_CHECKPOINT_DIR}"
@@ -63,7 +63,7 @@ function setup_users {
 function install_hbase {
     mkdir -p ${g_hbase_home}
 
-    echo "Downloading file from ${g_hbase_bin_url}..."
+    echo "Downloading ${g_hbase_bin_url}..."
     curl -sL ${g_hbase_bin_url} | tar -xz -C ${g_hbase_home} --strip-component=1
     ln -s ${g_hbase_home}/conf/hbase-site.xml ${g_conf_dir}/hbase-site.xml
 }
@@ -72,6 +72,7 @@ function setup_package {
     echo "Downloading ${g_pkg_url}..."
     mkdir -p ${g_app_dir}
     curl -Ls ${g_pkg_url} | tar -xz -C ${g_app_dir} --strip-components=1
+    ln -s ${g_app_dir}/bin/hadoop /usr/bin/hadoop
     
     echo "Installing dependencies..."
     apt-get update
