@@ -65,7 +65,7 @@
     <property>
         <description>Number of CPU cores that can be allocated for containers.</description>
         <name>yarn.nodemanager.resource.cpu-vcores</name>
-        <value>{{ .Env.HD_YARN_NODEMANAGER_RESOURCE_CPU_VCORES }}
+        <value>{{ .Env.HD_YARN_NODEMANAGER_RESOURCE_CPU_VCORES }}</value>
     </property>
     <property>
         <description>Enable/Disable virtual memory checker</description>
