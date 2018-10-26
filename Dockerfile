@@ -1,9 +1,8 @@
-FROM binhnv/openjdk
-MAINTAINER "Binh Van Nguyen<binhnv80@gmail.com>"
+FROM kalamangga/java-openjdk
+MAINTAINER Yudha H Tejaningrat <yht@kalamangga.net>
 
-ENV HD_VERSION="2.7.3" \
-    
-    HBASE_VERSION="1.1.2" \
+ENV HD_VERSION="3.0.3" \
+    HBASE_VERSION="2.0.2" \
     HBASE_HOME="${MY_APP_DIR}/hbase" \
     HBASE_HEAPSIZE="256M" \
     HBASE_OFFHEAPSIZE="256M" \
