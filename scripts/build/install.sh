@@ -21,7 +21,7 @@ g_yarn_log_dir="${YARN_LOG_DIR}"
 g_pid_dir="${HD_PID_DIR}"
 
 g_hbase_home="${HBASE_HOME}"
-g_hbase_bin_url="https://github.com/binhnv/hbase-binaries/releases/download/v${HBASE_VERSION}-hadoop-${HD_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz"
+g_hbase_bin_url="http://archive.apache.org/dist/hbase/hbase-${HBASE_VERSION}-bin.tar.gz"
 
 function update_ssh_config {
     local ssh_dir=$1
